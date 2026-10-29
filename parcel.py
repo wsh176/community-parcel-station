@@ -29,3 +29,23 @@ class ParcelManager:
         )
         self.parcels[tracking_number] = parcel
         return parcel
+
+
+
+    def pickup_parcel(self, tracking_number):
+        """办理包裹取件出库"""
+        if tracking_number not in self.parcels:
+            raise ValueError("未找到该快递单号")
+
+        parcel = self.parcels[tracking_number]
+
+        if parcel.status == "已取件":
+            raise ValueError("该包裹已经取件")
+
+        parcel.status = "已取件"
+        return parcel
+
+    def get_parcel(self, tracking_number):
+        """根据快递单号查询包裹"""
+        return self.parcels.get(tracking_number)
+
